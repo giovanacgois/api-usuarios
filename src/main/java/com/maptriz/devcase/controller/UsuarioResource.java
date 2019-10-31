@@ -59,4 +59,14 @@ public class UsuarioResource {
     }
 
     
+    /*
+    * PUT  
+     */
+    @PutMapping("/usuario")
+    public Usuario atualizarUsuario(@RequestBody Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+    
+    
+    
 }
