@@ -5,10 +5,28 @@
  */
 package com.maptriz.devcase.controller;
 
+import com.maptriz.devcase.model.Usuario;
+import com.maptriz.devcase.repository.UsuarioRepository;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  *
  * @author giovanacgois
  */
+@RestController
+@RequestMapping(value = "/api")
 public class UsuarioResource {
+   
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    
+    @GetMapping("/usuarios")
+    public List<Usuario> listaUsuarios(){
+    return usuarioRepository.findAll();
+    }
     
 }
