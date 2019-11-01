@@ -21,18 +21,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  *
  * @author giovanacgois
  */
-//essa é ma classe "interceptadora" chamada automaticamente pelo Spring quando
+//essa é uma classe "interceptadora" chamada automaticamente pelo Spring quando
 // houver uma exeption, personalizando o JSON devolvido ao cliente. 
 @RestControllerAdvice
 public class ErroDeValidacaoHandler {
 
     @Autowired
     private MessageSource messageSource;
-
+    
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public List<ErroDeFormularioDTO> handle(MethodArgumentNotValidException exception) {
-
+        
         List<ErroDeFormularioDTO> dto = new ArrayList<>();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors(); //o objeto "exception" guarda todos os erros que aconteceram
 
