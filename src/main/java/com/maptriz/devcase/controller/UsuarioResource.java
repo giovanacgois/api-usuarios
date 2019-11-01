@@ -77,12 +77,19 @@ public class UsuarioResource {
     public ResponseEntity<UsuarioDTO> salvarUsuario(@RequestBody @Valid UsuarioForm form, UriComponentsBuilder uriBuilder) {
         if (usuarioRepository.validarCampos(form)) {
             Usuario usuario = form.converter();
-            usuarioRepository.save(usuario);
-            URI uri = uriBuilder.path("/api/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
-            //devolve o código HTTP 201 (criado), ao invés do código 200;
-            return ResponseEntity.created(uri).body(new UsuarioDTO(usuario));
+            try {
+                usuarioRepository.save(usuario);
+                URI uri = uriBuilder.path("/api/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
+                //devolve o código HTTP 201 (criado), ao invés do código 200;
+                return ResponseEntity.created(uri).body(new UsuarioDTO(usuario));
+            } catch (Exception e) {
+                //caso não seja possível gravar o usuário -> CPF já existe.
+                return ResponseEntity.badRequest().build();
+            }
         }
-        return ResponseEntity.badRequest().build();
+
+        return ResponseEntity.badRequest()
+                .build();
     }
 
     /*
