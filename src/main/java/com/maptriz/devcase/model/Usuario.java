@@ -6,7 +6,7 @@
 package com.maptriz.devcase.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +25,22 @@ public class Usuario implements Serializable {
    @GeneratedValue(strategy = GenerationType.AUTO) //criar automaticamente os IDs 
    private long id;
    private String nome;
-   private Calendar dataNascimento;
+   private LocalDate dataNascimento;
    private String cpf;
-   private Calendar dataCadastro;
-   private Calendar dataAtualização;
+   private LocalDate dataCadastro = LocalDate.now();
+   private LocalDate dataAtualização = LocalDate.now();
    private boolean deletado;
+
+    public Usuario() {
+    }
+
+   
+    public Usuario(String nome, String cpf, LocalDate dataNascimento) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+      
 
     /**
      * @return the id
@@ -62,14 +73,14 @@ public class Usuario implements Serializable {
     /**
      * @return the dataNascimento
      */
-    public Calendar getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
     /**
      * @param dataNascimento the dataNascimento to set
      */
-    public void setDataNascimento(Calendar dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -90,28 +101,28 @@ public class Usuario implements Serializable {
     /**
      * @return the dataCadastro
      */
-    public Calendar getDataCadastro() {
+    public LocalDate getDataCadastro() {
         return dataCadastro;
     }
 
     /**
      * @param dataCadastro the dataCadastro to set
      */
-    public void setDataCadastro(Calendar dataCadastro) {
+    public void LocalDate(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
     /**
      * @return the dataAtualização
      */
-    public Calendar getDataAtualização() {
+    public LocalDate getDataAtualização() {
         return dataAtualização;
     }
 
     /**
      * @param dataAtualização the dataAtualização to set
      */
-    public void setDataAtualização(Calendar dataAtualização) {
+    public void setDataAtualização(LocalDate dataAtualização) {
         this.dataAtualização = dataAtualização;
     }
 
