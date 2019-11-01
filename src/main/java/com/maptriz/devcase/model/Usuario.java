@@ -7,6 +7,7 @@ package com.maptriz.devcase.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,30 +18,29 @@ import javax.persistence.Table;
  *
  * @author giovanacgois
  */
-
 @Entity
-@Table(name="TB_USUARIO")
+@Table (name="TB_USUARIO")
 public class Usuario implements Serializable {
-   @Id
-   @GeneratedValue(strategy = GenerationType.AUTO) //criar automaticamente os IDs 
-   private long id;
-   private String nome;
-   private LocalDate dataNascimento;
-   private String cpf;
-   private LocalDate dataCadastro = LocalDate.now();
-   private LocalDate dataAtualização = LocalDate.now();
-   private boolean deletado;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) //criar automaticamente os IDs 
+    private long id;
+    private String nome;
+    private LocalDate dataNascimento;
+    @Column(unique=true)
+    private String cpf;
+    private LocalDate dataCadastro = LocalDate.now();
+    private LocalDate dataAtualização = LocalDate.now();
+    private boolean deletado;
 
     public Usuario() {
     }
 
-   
     public Usuario(String nome, String cpf, LocalDate dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
     }
-      
 
     /**
      * @return the id
